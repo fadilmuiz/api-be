@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT;
+const sequelize = require("./config/config")
 
 const { User } = require('./models/index');
 const { generateToken } = require('./helpers/jwt');
@@ -154,6 +155,7 @@ app.put("/user/:id", async (req, res) => {
   }
 });
 
+sequelize.sync()
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
