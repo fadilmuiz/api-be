@@ -14,8 +14,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Endpoint root
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   res.send('Welcome to the Kopi Raden API!');
+  try {
+    // Contoh menggunakan Sequelize untuk memeriksa koneksi
+    const { Sequelize } = require('sequelize');
+    const sequelize = new Sequelize({
+      username: process.env.MYSQLUSER,
+      password: process.env.MYSQLPASSWORD,
+      database: process.env.MYSQLDATABASE,
+      host: process.env.MYSQLHOST,
+      dialect: 'mysql',
+      port: process.env.MYSQLPORT || 3306,
+    });
+
+    await sequelize.authenticate();
+    res.send('Database connection is successful!');
+  } catch (error) {
+    res.status(500).send('Database connection failed: ' + error.message);
+  }
 });
 
 // Controller Functions
