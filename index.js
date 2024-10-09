@@ -31,6 +31,7 @@ app.get('/', async (req, res) => {
     res.send('Welcome to the Kopi Raden API!');
     res.send('Database connection is successful!');
   } catch (error) {
+    res.send('Database connection failed: ' + error.message);
     res.status(500).send('Database connection failed: ' + error.message);
   }
 });
