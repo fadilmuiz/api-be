@@ -15,7 +15,6 @@ app.use(express.json());
 
 // Endpoint root
 app.get('/', async (req, res) => {
-  res.send('Welcome to the Kopi Raden API!');
   try {
     // Contoh menggunakan Sequelize untuk memeriksa koneksi
     const { Sequelize } = require('sequelize');
@@ -29,6 +28,7 @@ app.get('/', async (req, res) => {
     });
 
     await sequelize.authenticate();
+    res.send('Welcome to the Kopi Raden API!');
     res.send('Database connection is successful!');
   } catch (error) {
     res.status(500).send('Database connection failed: ' + error.message);
