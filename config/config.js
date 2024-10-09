@@ -20,6 +20,7 @@ module.exports = {
     password: process.env.MYSQLPASSWORD,
     database: process.env.MYSQLDATABASE,
     host: process.env.MYSQLHOST,
+    dialect: "mysql",
     dialectOptions: {
       ssl: {
         require: true,
